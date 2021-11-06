@@ -27,7 +27,9 @@ resource "google_container_cluster" "jx_cluster" {
   initial_node_count       = var.min_node_count
   logging_service          = var.logging_service
   monitoring_service       = var.monitoring_service
-  networking_mode          = var.networking_mode
+  networking_mode          = "VPC_NATIVE"
+
+  ip_allocation_policy {}
 
   // should disable master auth
   master_auth {
