@@ -374,6 +374,12 @@ variable "auto_upgrade" {
   default = false
 }
 
+variable "networking_mode" {
+  description = "Enable VPC-native routing other option is ROUTES"
+  type        = string
+  default     = "VPC_NATIVE"
+}
+
 variable "monitoring_service" {
   description = "The monitoring service to use. Can be monitoring.googleapis.com, monitoring.googleapis.com/kubernetes (beta) and none"
   type        = string
