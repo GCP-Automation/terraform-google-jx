@@ -129,6 +129,10 @@ resource "kubernetes_config_map" "jenkins_x_requirements" {
     google_container_node_pool.primary
   ]
 }
+  ip_allocation_policy {
+    cluster_ipv4_cidr_block  = var.cluster_ipv4_cidr_block
+    services_ipv4_cidr_block = var.services_ipv4_cidr_block
+  }
   private_cluster_config {
     enable_private_endpoint = var.disable_public_endpoint
     enable_private_nodes    = var.enable_private_nodes
