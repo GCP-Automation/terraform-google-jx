@@ -156,6 +156,12 @@ module "cluster" {
   cluster_network     = var.cluster_network
   cluster_subnetwork  = var.cluster_subnetwork
   cluster_id          = random_id.random.hex
+  enable_private_nodes          = var.enable_private_nodes
+  disable_public_endpoint       = var.disable_public_endpoint
+  master_ipv4_cidr_block        = var.master_ipv4_cidr_block
+  cluster_ipv4_cidr_block       = var.cluster_ipv4_cidr_block
+  services_ipv4_cidr_block      = var.services_ipv4_cidr_block
+  
   bucket_location     = var.bucket_location
   jenkins_x_namespace = var.jenkins_x_namespace
   force_destroy       = var.force_destroy
