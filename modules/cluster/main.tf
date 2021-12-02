@@ -29,7 +29,15 @@ resource "google_container_cluster" "jx_cluster" {
   monitoring_service       = var.monitoring_service
   networking_mode          = "VPC_NATIVE"
 
-  ip_allocation_policy {}
+  ip_allocation_policy {
+    cluster_ipv4_cidr_block  = var.cluster_ipv4_cidr_block
+    services_ipv4_cidr_block = var.services_ipv4_cidr_block
+  }
+  private_cluster_config {
+    enable_private_endpoint = var.disable_public_endpoint
+    enable_private_nodes    = var.enable_private_nodes
+    master_ipv4_cidr_block  = var.master_ipv4_cidr_block
+  }
 
   // should disable master auth
   master_auth {
@@ -129,15 +137,7 @@ resource "kubernetes_config_map" "jenkins_x_requirements" {
     google_container_node_pool.primary
   ]
 }
-  ip_allocation_policy {
-    cluster_ipv4_cidr_block  = var.cluster_ipv4_cidr_block
-    services_ipv4_cidr_block = var.services_ipv4_cidr_block
-  }
-  private_cluster_config {
-    enable_private_endpoint = var.disable_public_endpoint
-    enable_private_nodes    = var.enable_private_nodes
-    master_ipv4_cidr_block  = var.master_ipv4_cidr_block
-  }
+
 
 resource "helm_release" "jx-git-operator" {
   count = var.jx2 || var.jx_git_url == "" ? 0 : 1
